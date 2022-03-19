@@ -25,3 +25,26 @@ function kleioDecode(str) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
 }
+
+// Redirect page link
+function kleioLink(link) {
+  window.location.href = link;
+}
+
+// Scraping URL for variables | kleioVARS('');
+function kleioVARS() {
+  var vars = {};
+  window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+
+// Scraping URL for the first JSON string | kleioJSON();
+function kleioJSON() {
+  var vars;
+  window.location.href.replace(/(\[[^&]+\])/gi, function(json) {
+    vars = json;
+  });
+  return vars;
+}
